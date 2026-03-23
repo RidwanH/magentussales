@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Sales</label>
+    <permissionSets>Account_Plans</permissionSets>
+    <permissionSets>Accounts_Contact_Management</permissionSets>
+    <permissionSets>Action_Plan_Templates</permissionSets>
+    <permissionSets>Activities</permissionSets>
+    <permissionSets>force__SalesActionPlans</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>
