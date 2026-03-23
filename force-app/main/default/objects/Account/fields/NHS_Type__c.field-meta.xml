@@ -25,9 +25,9 @@
                 <label>Trust</label>
             </value>
             <value>
-                <fullName>Hosiptal</fullName>
+                <fullName>Hospital</fullName>
                 <default>false</default>
-                <label>Hosiptal/Site</label>
+                <label>Hospital/Site</label>
             </value>
             <value>
                 <fullName>Board</fullName>

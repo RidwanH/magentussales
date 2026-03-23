@@ -52,6 +52,12 @@
                             <value>ACCCONRELATION.IS_DIRECT</value>
                         </valueListItems>
                         <valueListItems>
+                            <value>Relationship_Strength__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CONTACT.REPORTS_TO.NAME</value>
+                        </valueListItems>
+                        <valueListItems>
                             <value>ACCCONRELATION.IS_ACTIVE</value>
                         </valueListItems>
                     </valueList>
@@ -621,7 +627,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Account Heirarchy</value>
+                    <value>Account Hierarchy</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection3</identifier>
