@@ -3,8 +3,17 @@
     <fullName>Imaging_Network__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <label>Imaging Network</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Network</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
     <referenceTo>Account</referenceTo>
-    <relationshipLabel>Accounts</relationshipLabel>
+    <relationshipLabel>Accounts (Imaging Network)</relationshipLabel>
     <relationshipName>Accounts</relationshipName>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
