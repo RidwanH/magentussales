@@ -6,7 +6,7 @@
     <lookupFilter>
         <active>true</active>
         <filterItems>
-            <field>$Source.RecordTypeId</field>
+            <field>Account.RecordTypeId</field>
             <operation>equals</operation>
             <value>Network</value>
         </filterItems>
