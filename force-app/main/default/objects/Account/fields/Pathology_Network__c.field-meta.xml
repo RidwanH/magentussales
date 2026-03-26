@@ -3,6 +3,15 @@
     <fullName>Pathology_Network__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <label>Pathology Network</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Network</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
     <referenceTo>Account</referenceTo>
     <relationshipLabel>Accounts (Pathology Network)</relationshipLabel>
     <relationshipName>Accounts1</relationshipName>

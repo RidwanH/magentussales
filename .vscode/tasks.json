@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Generate Salesforce Delta",
+      "type": "shell",
+      "command": "mkdir -p delta && sf sgd source delta --from main --to HEAD --output-dir delta",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "2. Show Current Target Org",
+      "type": "shell",
+      "command": "echo \"🔎 Current target org:\" && sf config get target-org --json | node -e \"let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>console.log(JSON.parse(d).result[0].value))\"",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "3. Open Package.xml",
+      "type": "shell",
+      "command": "code delta/package/package.xml",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Delta Prep",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "1. Generate Salesforce Delta",
+        "2. Show Current Target Org",
+        "3. Open Package.xml"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "4. Deploy Delta Manifest",
+      "type": "shell",
+      "command": "TARGET_ORG=$(sf config get target-org --json | node -e \"let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>console.log(JSON.parse(d).result[0].value))\") && echo \"🚀 Deploying to: $TARGET_ORG\" && echo \"\" && if [ \"${input:confirmDeploy}\" = \"Yes\" ]; then sf project deploy start --target-org \"$TARGET_ORG\" --manifest delta/package/package.xml; else echo \"❌ Deployment cancelled\"; fi",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "confirmDeploy",
+      "type": "pickString",
+      "description": "Deploy delta/package/package.xml?",
+      "options": ["No", "Yes"],
+      "default": "No"
+    }
+  ]
+}

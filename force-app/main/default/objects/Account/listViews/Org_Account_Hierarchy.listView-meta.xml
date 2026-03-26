@@ -7,7 +7,6 @@
     <columns>PARENT_NAME</columns>
     <columns>Imaging_Network__c</columns>
     <columns>Pathology_Network__c</columns>
-    <columns>Radiology_Network__c</columns>
     <columns>Speciality__c</columns>
     <filterScope>Everything</filterScope>
     <label>Org_Account_Hierarchy</label>
