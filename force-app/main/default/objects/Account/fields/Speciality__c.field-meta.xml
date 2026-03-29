@@ -19,6 +19,16 @@
                 <default>false</default>
                 <label>Pathology</label>
             </value>
+            <value>
+                <fullName>DMS</fullName>
+                <default>false</default>
+                <label>DMS</label>
+            </value>
+            <value>
+                <fullName>eConsent</fullName>
+                <default>false</default>
+                <label>eConsent</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
     <visibleLines>4</visibleLines>
