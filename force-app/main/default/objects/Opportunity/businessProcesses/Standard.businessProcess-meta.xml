@@ -15,10 +15,6 @@
         <default>false</default>
     </values>
     <values>
-        <fullName>Negotiation</fullName>
-        <default>false</default>
-    </values>
-    <values>
         <fullName>Prove</fullName>
         <default>false</default>
     </values>
