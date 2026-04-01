@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Org_Contact_Hierarchy</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>CONTACT.REPORTS_TO.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CONTACT.TITLE</columns>
+    <columns>CONTACT.DEPARTMENT</columns>
+    <columns>CONTACT.TITLE_TYPE</columns>
+    <columns>CONTACT.BUYER_ATTRIBUTES</columns>
+    <filterScope>Everything</filterScope>
+    <label>Org_Contact_Hierarchy</label>
+</ListView>

@@ -170,27 +170,11 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Investor</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Other</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Partner</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Press</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Prospect</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Reseller</fullName>
             <default>false</default>
         </values>
     </picklistValues>

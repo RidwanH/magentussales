@@ -126,6 +126,9 @@
     <tabs>standard-home</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
+    <tabs>standard-Opportunity</tabs>
+    <tabs>standard-Quote</tabs>
+    <tabs>standard-Product2</tabs>
     <tabs>standard-Event</tabs>
     <tabs>standard-report</tabs>
     <tabs>standard-Dashboard</tabs>
