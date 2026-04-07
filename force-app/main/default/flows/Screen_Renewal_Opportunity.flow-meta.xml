@@ -192,21 +192,9 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>CampaignId</field>
-            <value>
-                <elementReference>rec_OriginalOpportunity.CampaignId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
             <field>CloseDate</field>
             <value>
                 <elementReference>Input_CloseDate</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>ContractId</field>
-            <value>
-                <elementReference>rec_OriginalOpportunity.ContractId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -231,18 +219,6 @@
             <field>Name</field>
             <value>
                 <elementReference>Input_OpportunityName</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>NextStep</field>
-            <value>
-                <elementReference>rec_OriginalOpportunity.NextStep</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Opportunity_Type__c</field>
-            <value>
-                <stringValue>Renewal</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -272,7 +248,7 @@
         <inputAssignments>
             <field>Type</field>
             <value>
-                <elementReference>rec_OriginalOpportunity.Type</elementReference>
+                <stringValue>Renewal</stringValue>
             </value>
         </inputAssignments>
         <object>Opportunity</object>
@@ -455,7 +431,7 @@
         </fields>
         <fields>
             <name>Success_Message</name>
-            <fieldText>&lt;p&gt;The renewal opportunity &lt;strong&gt;{!Input_OpportunityName}&lt;/strong&gt; has been created with all associated products.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Click &lt;strong&gt;Finish&lt;/strong&gt; to close.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;The renewal opportunity &lt;strong&gt;{!Input_OpportunityName}&lt;/strong&gt; has been created with all associated products.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;/lightning/r/Opportunity/{!var_NewOpportunityId}/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;Navigate to Renewal Opportunity&lt;/a&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -476,7 +452,7 @@
             <targetReference>Get_Original_Opportunity</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>col_NewLineItems</name>
         <dataType>SObject</dataType>
