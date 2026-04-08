@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+
+    <!-- Assignments -->
+    <assignments>
+        <name>Assign_Module_To_Collection</name>
+        <label>Assign Module To Collection</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>rec_NewModule.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>var_LoopProduct.Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>rec_NewModule.Estate__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>rec_NewModule.Product__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>var_LoopProduct.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>rec_NewModule.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Live</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>col_NewModules</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>rec_NewModule</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Selected_Products</targetReference>
+        </connector>
+    </assignments>
+
+    <assignments>
+        <name>Handle_Create_Error</name>
+        <label>Handle Create Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_ErrorMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Screen_Error</targetReference>
+        </connector>
+    </assignments>
+
+    <assignments>
+        <name>Reset_Module_Record</name>
+        <label>Reset Module Record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>rec_NewModule</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$GlobalConstant.EmptyString</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Module_To_Collection</targetReference>
+        </connector>
+    </assignments>
+
+    <description>Allows users to select multiple Products from a data table and create Module records linked to the current Estate.</description>
+
+    <interviewLabel>Add Modules To Estate {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Add Modules To Estate</label>
+
+    <!-- Loops -->
+    <loops>
+        <name>Loop_Selected_Products</name>
+        <label>Loop Selected Products</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>col_SelectedProducts</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Reset_Module_Record</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Create_Modules</targetReference>
+        </noMoreValuesConnector>
+        <assignNextValueToReference>var_LoopProduct</assignNextValueToReference>
+    </loops>
+
+    <processType>Flow</processType>
+
+    <!-- Record Creates -->
+    <recordCreates>
+        <name>Create_Modules</name>
+        <label>Create Modules</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Screen_Success</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Handle_Create_Error</targetReference>
+        </faultConnector>
+        <inputReference>col_NewModules</inputReference>
+    </recordCreates>
+
+    <!-- Record Lookups -->
+    <recordLookups>
+        <name>Get_Products</name>
+        <label>Get Products</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Screen_Select_Products</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Family</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>CRIS</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Product2</object>
+        <storeOutputAutomatically>false</storeOutputAutomatically>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>Family</queriedFields>
+        <queriedFields>Description</queriedFields>
+        <queriedFields>IsActive</queriedFields>
+        <outputReference>col_Products</outputReference>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+    </recordLookups>
+
+    <!-- Screens -->
+    <screens>
+        <name>Screen_Error</name>
+        <label>Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Error_Header</name>
+            <fieldType>DisplayText</fieldType>
+            <fieldText>&lt;p&gt;&lt;span style="color: rgb(194, 57, 52);"&gt;&lt;b style="font-size: 18px;"&gt;Error&lt;/b&gt;&lt;/span&gt;&lt;/p&gt;</fieldText>
+        </fields>
+        <fields>
+            <name>Error_Message</name>
+            <fieldType>DisplayText</fieldType>
+            <fieldText>&lt;p&gt;An error occurred while creating the modules:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;{!var_ErrorMessage}&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please contact your administrator if this issue persists.&lt;/p&gt;</fieldText>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+
+    <screens>
+        <name>Screen_Select_Products</name>
+        <label>Select Products</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Loop_Selected_Products</targetReference>
+        </connector>
+        <fields>
+            <name>Select_Header</name>
+            <fieldType>DisplayText</fieldType>
+            <fieldText>&lt;p&gt;&lt;b style="font-size: 18px;"&gt;Add Modules to Estate&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(68, 68, 68);"&gt;Select the products to add as modules. Each selected product will create a Module record linked to this Estate.&lt;/span&gt;&lt;/p&gt;</fieldText>
+        </fields>
+        <fields>
+            <name>Product_DataTable</name>
+            <dataTypeMappings>
+                <typeName>T</typeName>
+                <typeValue>Product2</typeValue>
+            </dataTypeMappings>
+            <extensionName>flowRuntime:datatable</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>tableData</name>
+                <value>
+                    <elementReference>col_Products</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columns</name>
+                <value>
+                    <stringValue>[{"label":"Product Name","fieldName":"Name","type":"text"},{"label":"Product Family","fieldName":"Family","type":"text"},{"label":"Description","fieldName":"Description","type":"text"},{"label":"Active","fieldName":"IsActive","type":"boolean"}]</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectionMode</name>
+                <value>
+                    <stringValue>MULTI_SELECT</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>minRowSelection</name>
+                <value>
+                    <numberValue>1</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>shouldDisplayLabel</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <name>selectedRows</name>
+                <assignToReference>col_SelectedProducts</assignToReference>
+            </outputParameters>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+
+    <screens>
+        <name>Screen_Success</name>
+        <label>Success</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Success_Header</name>
+            <fieldType>DisplayText</fieldType>
+            <fieldText>&lt;p&gt;&lt;b style="font-size: 18px;"&gt;Modules Added Successfully&lt;/b&gt;&lt;/p&gt;</fieldText>
+        </fields>
+        <fields>
+            <name>Success_Message</name>
+            <fieldType>DisplayText</fieldType>
+            <fieldText>&lt;p&gt;The selected products have been added as modules to this Estate.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Click &lt;b&gt;Finish&lt;/b&gt; to close.&lt;/p&gt;</fieldText>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+
+    <!-- Start Element -->
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Products</targetReference>
+        </connector>
+    </start>
+
+    <status>Draft</status>
+
+    <!-- Variables -->
+    <variables>
+        <name>col_NewModules</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Module__c</objectType>
+    </variables>
+
+    <variables>
+        <name>col_Products</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Product2</objectType>
+    </variables>
+
+    <variables>
+        <name>col_SelectedProducts</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Product2</objectType>
+    </variables>
+
+    <variables>
+        <name>rec_NewModule</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Module__c</objectType>
+    </variables>
+
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <variables>
+        <name>var_ErrorMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <variables>
+        <name>var_LoopProduct</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Product2</objectType>
+    </variables>
+</Flow>
