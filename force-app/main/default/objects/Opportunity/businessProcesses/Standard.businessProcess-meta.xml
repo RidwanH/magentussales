@@ -19,15 +19,15 @@
         <default>false</default>
     </values>
     <values>
+        <fullName>Negotiation</fullName>
+        <default>false</default>
+    </values>
+    <values>
         <fullName>Prove</fullName>
         <default>false</default>
     </values>
     <values>
         <fullName>Qualification</fullName>
-        <default>false</default>
-    </values>
-    <values>
-        <fullName>SOW</fullName>
         <default>false</default>
     </values>
 </BusinessProcess>

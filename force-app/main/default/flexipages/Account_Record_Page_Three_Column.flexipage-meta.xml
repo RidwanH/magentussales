@@ -780,6 +780,9 @@
                             <value>OPPORTUNITY.AMOUNT</value>
                         </valueListItems>
                         <valueListItems>
+                            <value>OPPORTUNITY.TYPE</value>
+                        </valueListItems>
+                        <valueListItems>
                             <value>OPPORTUNITY.CLOSE_DATE</value>
                         </valueListItems>
                     </valueList>
