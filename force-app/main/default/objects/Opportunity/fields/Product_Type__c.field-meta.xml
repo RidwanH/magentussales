@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Type__c</fullName>
+    <label>Product Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pathology</fullName>
+                <default>false</default>
+                <label>Pathology</label>
+            </value>
+            <value>
+                <fullName>Radiology</fullName>
+                <default>false</default>
+                <label>Radiology</label>
+            </value>
+            <value>
+                <fullName>eConsent</fullName>
+                <default>false</default>
+                <label>eConsent</label>
+            </value>
+            <value>
+                <fullName>DMS</fullName>
+                <default>false</default>
+                <label>DMS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

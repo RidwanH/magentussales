@@ -218,6 +218,16 @@
                 <identifier>RecordLeadSourceField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Product_Type__c</fieldItem>
+                <identifier>RecordProduct_Type__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-47986c8a-b34b-4c9b-be5e-d1fd2883fa4b</name>
         <type>Facet</type>
     </flexiPageRegions>
